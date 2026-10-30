@@ -15,20 +15,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Joy Sky Laundry | Premium Laundry in Cape Town - Free Collection & Delivery",
+  title: "Joy Sky Laundry | Premium Laundry in Cape Town - Mowbray",
   description:
-    "Cape Town's premier laundry & dry cleaning service in Mowbray. Free collection and delivery across Cape Town. Wash, Dry & Fold from R70/9kg load. Book online or via WhatsApp +27 73 696 9918.",
+    "E2A Arcade, 76 Main Road, Mowbray, Cape Town. Wash, Dry & Fold from R35/kg (Min 5kg). Drop & Go 10% Discount. Free soap, softener & unique freshener included. Phone/WhatsApp: +27 73 696 9918.",
   keywords: [
     "laundry cape town",
     "laundromat mowbray",
     "laundry collection cape town",
     "wash dry fold cape town",
     "Joy Sky Laundry",
+    "E2A Arcade Mowbray",
   ],
   authors: [{ name: "Joy Sky Laundry" }],
   openGraph: {
-    title: "Joy Sky Laundry - Premium Laundry in Cape Town",
-    description: "Wash, Dry, and Fold at R70 per 9kg load. Free Collection & Delivery.",
+    title: "Joy Sky Laundry - Mowbray, Cape Town",
+    description: "Wash, Dry & Fold from R35/kg. Wash 5x Get 5kg Free! Drop & Go 10% Off. Collect & Deliver.",
     type: "website",
     locale: "en_ZA",
   },

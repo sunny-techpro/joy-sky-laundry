@@ -22,8 +22,8 @@ export function Reviews() {
       date: "1 month ago",
       rating: 5,
       review:
-        "Joy Sky has been my go-to weekly laundry spot. R70 for a full 9kg bag of wash, dry, and fold is by far the best price in Mowbray. The clothes come back warm, spotless, and neatly packaged. Always punctual on pickup times!",
-      highlight: "Unbeatable R70/9kg value",
+        "Joy Sky has been my go-to weekly laundry spot at E2A Arcade. R35/kg for wash, dry, and fold with free soap, softener, and that unique freshener is the best deal in Mowbray. Plus the 'Wash 5x Get 5kg Free' reward program is awesome. Punctual, fresh, and friendly service!",
+      highlight: "Unbeatable R35/kg & 5kg Free Reward",
     },
     {
       name: "Liam De Villiers",

@@ -21,10 +21,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Services & Pricing", href: "#services" },
-    { label: "Book Online", href: "#booking" },
+    { label: "Price List & Offers", href: "#services" },
+    { label: "Book Pickup", href: "#booking" },
     { label: "Customer Reviews", href: "#reviews" },
-    { label: "Operating Hours", href: "#contact" },
+    { label: "Hours & Location", href: "#contact" },
   ];
 
   return (
@@ -51,7 +51,7 @@ export function Navbar() {
               </span>
               <span className="text-[11px] font-medium tracking-wide text-slate-500 dark:text-slate-400 flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-sky-500" />
-                Mowbray • Cape Town
+                E2A Arcade, Mowbray • Cape Town
               </span>
             </div>
           </Link>

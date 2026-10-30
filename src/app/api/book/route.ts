@@ -17,10 +17,10 @@ export async function POST(req: Request) {
     const emailPass = process.env.EMAIL_PASS;
     const receiverEmail = process.env.RECEIVER_EMAIL || emailUser || "sky@joyskylaundromat.co.za";
 
-    // Fallback: If credentials are not configured (e.g. for Vercel client demo preview)
+    // Demo Mode Fallback: ONLY active if EMAIL_USER/EMAIL_PASS are NOT configured in .env
     if (!emailUser || !emailPass) {
-      console.log("ℹ️ [Joy Sky Laundry Demo Mode] Email credentials not found in env variables.");
-      console.log("Booking Details Received:", {
+      console.log("ℹ️ [Joy Sky Laundry Demo Mode] EMAIL_USER credentials not set in environment.");
+      console.log("Booking Details Logged:", {
         name,
         phone,
         service,
@@ -33,99 +33,89 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: true,
         demoMode: true,
-        message: "Booking received successfully! (Demo mode: Email credentials not set in .env)",
+        message: "Booking received successfully! (Demo mode: EMAIL_USER credentials not configured in environment)",
       });
     }
 
-    // Production Email Dispatch via Nodemailer
-    try {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: emailUser,
-          pass: emailPass,
-        },
-      });
+    // Production Email Dispatch via Nodemailer (Real mode - no demo fallback when EMAIL_USER is present)
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: emailUser,
+        pass: emailPass,
+      },
+    });
 
-      const mailOptions = {
-        from: `"Joy Sky Laundry Website" <${emailUser}>`,
-        to: receiverEmail,
-        replyTo: emailUser,
-        subject: `🧺 New Laundry Booking: ${name} - ${service}`,
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
-            <div style="text-align: center; padding-bottom: 20px; border-bottom: 2px solid #0284c7;">
-              <h2 style="color: #0284c7; margin: 0;">Joy Sky Laundry - Mowbray</h2>
-              <p style="color: #64748b; font-size: 14px; margin: 4px 0 0 0;">New Online Booking Submission</p>
-            </div>
-            
-            <div style="padding: 20px 0;">
-              <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                  <td style="padding: 8px 0; color: #475569; font-weight: bold; width: 140px;">Customer Name:</td>
-                  <td style="padding: 8px 0; color: #0f172a;">${name}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; color: #475569; font-weight: bold;">Phone Number:</td>
-                  <td style="padding: 8px 0; color: #0f172a;"><a href="tel:${phone}" style="color: #0284c7; text-decoration: none;">${phone}</a></td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; color: #475569; font-weight: bold;">Selected Service:</td>
-                  <td style="padding: 8px 0; color: #0f172a; font-weight: bold;">${service}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; color: #475569; font-weight: bold;">Pickup Date:</td>
-                  <td style="padding: 8px 0; color: #0f172a;">${pickupDate}</td>
-                </tr>
-                ${
-                  suburb || address
-                    ? `<tr>
-                        <td style="padding: 8px 0; color: #475569; font-weight: bold;">Address:</td>
-                        <td style="padding: 8px 0; color: #0f172a;">${address || ""} ${suburb ? `(${suburb})` : ""}</td>
-                      </tr>`
-                    : ""
-                }
-                ${
-                  message
-                    ? `<tr>
-                        <td style="padding: 8px 0; color: #475569; font-weight: bold; vertical-align: top;">Message / Notes:</td>
-                        <td style="padding: 8px 0; color: #334155;">${message}</td>
-                      </tr>`
-                    : ""
-                }
-              </table>
-            </div>
-
-            <div style="background-color: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 12px; color: #64748b; text-align: center;">
-              This notification was generated automatically from the Joy Sky Laundry website booking form.
-            </div>
+    const mailOptions = {
+      from: `"Joy Sky Laundry" <${emailUser}>`,
+      to: receiverEmail,
+      replyTo: emailUser,
+      subject: `🧺 New Booking: ${name} - ${service}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
+          <div style="text-align: center; padding-bottom: 20px; border-bottom: 2px solid #0284c7;">
+            <h2 style="color: #0284c7; margin: 0;">Joy Sky Laundry</h2>
+            <p style="color: #64748b; font-size: 14px; margin: 4px 0 0 0;">E2A Arcade, 76 Main Road, Mowbray, Cape Town</p>
           </div>
-        `,
-      };
+          
+          <div style="padding: 20px 0;">
+            <h3 style="color: #0f172a; margin-top: 0;">New Online Pickup Request</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <tr>
+                <td style="padding: 8px 0; color: #475569; font-weight: bold; width: 140px;">Customer Name:</td>
+                <td style="padding: 8px 0; color: #0f172a;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #475569; font-weight: bold;">Phone / WhatsApp:</td>
+                <td style="padding: 8px 0; color: #0f172a;"><a href="tel:${phone}" style="color: #0284c7; text-decoration: none;">${phone}</a></td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #475569; font-weight: bold;">Selected Service:</td>
+                <td style="padding: 8px 0; color: #0f172a; font-weight: bold;">${service}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #475569; font-weight: bold;">Pickup Date:</td>
+                <td style="padding: 8px 0; color: #0f172a;">${pickupDate}</td>
+              </tr>
+              ${
+                address || suburb
+                  ? `<tr>
+                      <td style="padding: 8px 0; color: #475569; font-weight: bold;">Pickup Address:</td>
+                      <td style="padding: 8px 0; color: #0f172a;">${address || ""} ${suburb ? `(${suburb})` : ""}</td>
+                    </tr>`
+                  : ""
+              }
+              ${
+                message
+                  ? `<tr>
+                      <td style="padding: 8px 0; color: #475569; font-weight: bold; vertical-align: top;">Notes / Special Care:</td>
+                      <td style="padding: 8px 0; color: #334155;">${message}</td>
+                    </tr>`
+                  : ""
+              }
+            </table>
+          </div>
 
-      await transporter.sendMail(mailOptions);
+          <div style="background-color: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 12px; color: #64748b; text-align: center;">
+            Order received via website booking system • Joy Sky Laundry • +27 73 696 9918
+          </div>
+        </div>
+      `,
+    };
 
-      return NextResponse.json({
-        success: true,
-        demoMode: false,
-        message: "Your booking request has been dispatched via email successfully!",
-      });
-    } catch (mailError) {
-      console.error("Nodemailer error (falling back gracefully for demo):", mailError);
-      // Graceful fallback if SMTP authentication failed on Vercel
-      return NextResponse.json({
-        success: true,
-        demoMode: true,
-        warning: "Booking registered (Demo fallback activated).",
-        message: "Booking received successfully!",
-      });
-    }
-  } catch (err) {
-    console.error("Server API error in /api/book:", err);
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json({
+      success: true,
+      demoMode: false,
+      message: "Your booking request has been dispatched via email successfully!",
+    });
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : "Internal server error";
+    console.error("Booking API Error:", err);
     return NextResponse.json(
-      { error: "Internal server error while processing booking." },
+      { error: `Failed to process booking: ${errorMsg}` },
       { status: 500 }
     );
   }
 }
-

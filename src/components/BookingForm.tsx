@@ -14,13 +14,15 @@ import {
   MessageCircle,
   FileText,
   ShieldCheck,
+  Tag,
+  Truck,
 } from "lucide-react";
 
 export function BookingForm() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    service: "Wash, Dry & Fold - R70 per load (9kg)",
+    service: "Wash - Dry - Fold (R35.00/kg - Min 5KG)",
     pickupDate: "",
     message: "",
     address: "",
@@ -30,11 +32,20 @@ export function BookingForm() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const serviceOptions = [
-    "Wash, Dry & Fold - R70 per load (9kg)",
-    "Steam Ironing & Pressing - from R85",
-    "Duvets, Blankets & Bulky Bedding - from R110",
-    "Delicates & Specialty Care - from R95",
-    "Commercial & Student Package",
+    "Wash - Dry - Fold (R35.00/kg - Min 5KG)",
+    "Wash Only / Dry Only (R25.00/kg)",
+    "Linen / Towels Wash & Dry (R40.00/kg)",
+    "Stain Wash & Dry (R50.00/kg)",
+    "Wash - Dry - Iron (R60.00/kg)",
+    "Linen Stain Wash Dry Iron (R80.00/kg)",
+    "Express Service (R90.00/kg)",
+    "Ironing Only (from R15/item - R35/kg)",
+    "Shoe Cleaning (R100.00/pair)",
+    "Special Clean Jacket / Coat (R160.00)",
+    "Three Piece Suit (R210.00)",
+    "Blankets & Duvets (R150 - R250)",
+    "Curtains / Couch Cover / Rug (R60 - R80/kg)",
+    "Mixed Service / Custom Order",
   ];
 
   const handleChange = (
@@ -66,8 +77,8 @@ export function BookingForm() {
 
       toast.success(
         data.demoMode
-          ? "Booking received! (Demo Mode: Request registered successfully)"
-          : "Booking confirmed! Confirmation email dispatched.",
+          ? "Booking registered! (Demo Mode: Received successfully)"
+          : "Booking confirmed! Notification email sent.",
         { id: toastId, duration: 5000 }
       );
 
@@ -81,9 +92,9 @@ export function BookingForm() {
     }
   };
 
-  // WhatsApp prefilled message
+  // WhatsApp prefilled message using exact required phone number
   const whatsappBookingUrl = `https://wa.me/27736969918?text=${encodeURIComponent(
-    `Hi Joy Sky Laundry! I would like to schedule a laundry pickup:\n• Name: ${formData.name}\n• Phone: ${formData.phone}\n• Service: ${formData.service}\n• Pickup Date: ${formData.pickupDate}\n• Address: ${formData.address || "Cape Town"}\n• Message: ${formData.message || "None"}`
+    `Hi Joy Sky Laundry! I would like to schedule a laundry pickup:\n• Name: ${formData.name}\n• Phone: ${formData.phone}\n• Service: ${formData.service}\n• Pickup Date: ${formData.pickupDate}\n• Address: ${formData.address || "Cape Town"}\n• Notes: ${formData.message || "None"}`
   )}`;
 
   return (
@@ -92,18 +103,22 @@ export function BookingForm() {
       <div className="absolute top-1/2 right-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold glass-panel border border-sky-400/40 text-sky-600 dark:text-sky-300 mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            Easy 1-Minute Booking
+            Quick Online Booking
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Schedule Your Free Pickup
+            Schedule Your Laundry Pickup
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600 dark:text-slate-300">
-            Submit your details below. Our team in Mowbray will collect, sanitize,
-            and deliver your laundry fresh to your Cape Town address.
+            Based at E2A Arcade, 76 Main Road, Mowbray. Submit your details below or order via WhatsApp.
           </p>
+
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-300/40 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+            <Tag className="w-3.5 h-3.5" />
+            <span>Drop & Go Collection & Delivery — 10% Discount Applied!</span>
+          </div>
         </div>
 
         {/* Card Container */}
@@ -120,7 +135,7 @@ export function BookingForm() {
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                   Thank you, <strong>{formData.name || "Customer"}</strong>. Your booking
-                  details have been dispatched to our Mowbray dispatch hub for pickup on{" "}
+                  has been dispatched to our Mowbray dispatch hub for pickup on{" "}
                   <strong>{formData.pickupDate}</strong>.
                 </p>
               </div>
@@ -143,6 +158,9 @@ export function BookingForm() {
                     <strong>Notes:</strong> {formData.message}
                   </div>
                 )}
+                <div className="pt-2 text-[11px] text-slate-500 border-t border-slate-200 dark:border-slate-700">
+                  🚚 Collect & Deliver Transport: R100 • Min 5KG for Wash & Fold
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
@@ -153,7 +171,7 @@ export function BookingForm() {
                   className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-md flex items-center justify-center gap-2 transition-transform hover:scale-105"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  Confirm via WhatsApp Instantly
+                  Confirm via WhatsApp (+27 73 696 9918)
                 </a>
                 <button
                   type="button"
@@ -222,7 +240,7 @@ export function BookingForm() {
                     htmlFor="service"
                     className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
                   >
-                    Service <span className="text-red-500">*</span>
+                    Select Service <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="service"
@@ -262,13 +280,13 @@ export function BookingForm() {
                 </div>
               </div>
 
-              {/* Collection Address */}
+              {/* Pickup Address */}
               <div>
                 <label
                   htmlFor="address"
                   className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
                 >
-                  Pickup Address (Cape Town)
+                  Pickup Address (Cape Town Area)
                 </label>
                 <div className="relative">
                   <MapPin className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -290,14 +308,14 @@ export function BookingForm() {
                   htmlFor="message"
                   className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
                 >
-                  Message / Special Instructions
+                  Special Notes or Garment Instructions
                 </label>
                 <div className="relative">
                   <textarea
                     id="message"
                     name="message"
                     rows={3}
-                    placeholder="Tell us about special garment care, preferred time window, gate access code, etc."
+                    placeholder="e.g. Please separate delicate silks, gate access code #4321, prefer morning collection."
                     value={formData.message}
                     onChange={handleChange}
                     className="glass-input w-full px-4 py-3 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all resize-none"
@@ -320,14 +338,21 @@ export function BookingForm() {
                   ) : (
                     <>
                       <Send className="w-5 h-5" />
-                      <span>Confirm Online Booking (Free Pickup)</span>
+                      <span>Submit Pickup Request</span>
                     </>
                   )}
                 </button>
 
-                <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400 text-center">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>No upfront payment required. Accepted: Cash, Card, Snap, Scan, EFT.</span>
+                <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-slate-500 dark:text-slate-400 text-center">
+                  <div className="flex items-center gap-1.5">
+                    <Truck className="w-4 h-4 text-sky-500" />
+                    <span>Transport: R100 • Min 5KG Wash & Fold</span>
+                  </div>
+                  <span className="hidden sm:inline">•</span>
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                    <span>Cash on Delivery, Yoco, FNB EFT & Card Machine</span>
+                  </div>
                 </div>
               </div>
             </form>

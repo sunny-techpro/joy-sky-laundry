@@ -28,8 +28,8 @@ export function ContactHours() {
             Operating Hours & Direct Contact
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300">
-            Conveniently situated on Main Road in Mowbray. Drop by or schedule a
-            collection directly through phone, email, or WhatsApp.
+            Conveniently situated at E2A Arcade in Mowbray. Drop off your items or book
+            a scheduled collection via phone or WhatsApp.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export function ContactHours() {
                         Monday – Saturday
                       </div>
                       <div className="text-xs text-slate-500 dark:text-slate-400">
-                        Full wash, dry, fold & collection service
+                        Full wash, dry, iron & collection service
                       </div>
                     </div>
                   </div>
@@ -93,13 +93,13 @@ export function ContactHours() {
                         Sunday
                       </div>
                       <div className="text-xs text-slate-500 dark:text-slate-400">
-                        Weekend wash drop-offs & scheduled returns
+                        Drop-offs & scheduled returns
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
                     <span className="text-sm font-extrabold text-amber-600 dark:text-amber-400 font-mono">
-                      9:00 AM – 5:30 PM
+                      9:00 AM – 5:00 PM
                     </span>
                   </div>
                 </div>
@@ -107,8 +107,8 @@ export function ContactHours() {
             </div>
 
             <div className="mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
-              <span>🚀 Free collection scheduled during operating hours</span>
-              <span className="font-semibold text-sky-600 dark:text-sky-400">Same-Day Available</span>
+              <span>🚀 Collect & Deliver Transport: R100</span>
+              <span className="font-semibold text-sky-600 dark:text-sky-400">Express Available</span>
             </div>
           </motion.div>
 
@@ -181,19 +181,19 @@ export function ContactHours() {
                 {/* Address */}
                 <div className="p-4 rounded-2xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-sky-500" />
+                    <MapPin className="w-5 h-5 text-sky-500 shrink-0" />
                     <div>
                       <div className="text-xs text-slate-500 dark:text-slate-400">
-                        Physical Address
+                        Physical Store Address
                       </div>
                       <div className="text-sm font-bold text-slate-900 dark:text-white">
-                        76 Main Rd, Mowbray, Cape Town
+                        E2A Arcade, 76 Main Road, Mowbray, Cape Town, 7700
                       </div>
                     </div>
                   </div>
                   <a
                     href="#map"
-                    className="text-xs font-semibold text-sky-600 dark:text-sky-400 shrink-0"
+                    className="text-xs font-semibold text-sky-600 dark:text-sky-400 shrink-0 ml-2"
                   >
                     View Map &darr;
                   </a>
