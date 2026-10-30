@@ -16,9 +16,9 @@ import {
 export function MapAndFooter() {
   const address = "E2A Arcade, 76 Main Road, Mowbray, Cape Town, 7700";
   const mapEmbedUrl =
-    "https://maps.google.com/maps?q=E2A%20Arcade%2C%2076%20Main%20Road%2C%20Mowbray%2C%20Cape%20Town%2C%207700&t=&z=16&ie=UTF8&iwloc=&output=embed";
+    "https://maps.google.com/maps?q=Joy%20Sky%20Laundry%2C%2076%20Main%20Road%2C%20Mowbray%2C%20Cape%20Town%2C%207700%2C%20South%20Africa&t=&z=17&ie=UTF8&iwloc=&output=embed";
   const googleMapsDirectionsUrl =
-    "https://www.google.com/maps/dir/?api=1&destination=E2A+Arcade,+76+Main+Road,+Mowbray,+Cape+Town,+7700";
+    "https://www.google.com/maps/dir/?api=1&destination=Joy+Sky+Laundry,+76+Main+Road,+Mowbray,+Cape+Town,+7700,+South+Africa";
 
   return (
     <footer id="map" className="relative pt-10 pb-12 overflow-hidden">
