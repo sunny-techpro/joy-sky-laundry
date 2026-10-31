@@ -91,7 +91,14 @@ export function MapAndFooter() {
             <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-1">
               <p>📍 {address}</p>
               <p>📞 Phone/WhatsApp: +27 73 696 9918</p>
-              <p>✉️ joyskylaundry@gmail.com</p>
+              <p>
+                <a
+                  href="mailto:joyskylaundry@gmail.com"
+                  className="hover:text-sky-500 transition-colors inline-flex items-center gap-1.5"
+                >
+                  ✉️ joyskylaundry@gmail.com
+                </a>
+              </p>
             </div>
           </div>
 
