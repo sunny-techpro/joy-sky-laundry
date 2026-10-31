@@ -159,7 +159,7 @@ export function ContactHours() {
 
                 {/* Email */}
                 <a
-                  href="mailto:sky@joyskylaundromat.co.za"
+                  href="mailto:joyskylaundry@gmail.com"
                   className="p-4 rounded-2xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-center justify-between hover:border-sky-400/60 dark:hover:border-sky-500 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
@@ -169,7 +169,7 @@ export function ContactHours() {
                         Email Address
                       </div>
                       <div className="text-sm font-bold text-slate-900 dark:text-white break-all">
-                        sky@joyskylaundromat.co.za
+                        joyskylaundry@gmail.com
                       </div>
                     </div>
                   </div>

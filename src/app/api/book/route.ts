@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     const emailUser = process.env.EMAIL_USER;
     const emailPass = process.env.EMAIL_PASS;
-    const receiverEmail = process.env.RECEIVER_EMAIL || emailUser || "sky@joyskylaundromat.co.za";
+    const receiverEmail = process.env.RECEIVER_EMAIL || emailUser || "joyskylaundry@gmail.com";
 
     // Demo Mode Fallback: ONLY active if EMAIL_USER/EMAIL_PASS are NOT configured in .env
     if (!emailUser || !emailPass) {

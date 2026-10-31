@@ -91,7 +91,7 @@ export function MapAndFooter() {
             <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-1">
               <p>📍 {address}</p>
               <p>📞 Phone/WhatsApp: +27 73 696 9918</p>
-              <p>✉️ sky@joyskylaundromat.co.za</p>
+              <p>✉️ joyskylaundry@gmail.com</p>
             </div>
           </div>
 
